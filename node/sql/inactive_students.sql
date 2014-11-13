@@ -1,0 +1,1 @@
+SELECT `firstname`, `lastname`, `email`, `lastlogin` FROM `mdl_user`
