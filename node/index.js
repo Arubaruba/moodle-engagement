@@ -1,17 +1,28 @@
+var Promise = require('bluebird');
 var express = require('express');
+var path = require('path');
+var database = require('./database');
+var authentication = require('./authentication');
 var app = express();
-var sendReminderEmail = require('./send_reminder_email');
-var inactiveStudents = require('./inactive_students');
 
-app.get('/', function(request, response) {
-  response.end('ok');
+// Add database access to the request (req) variable
+app.use('/data', database.addToRequest);
+// Make sure the user is logged in if they want to access the RESTful service
+app.use('/data', authentication.isLoggedIn);
+
+// The login path
+app.get('/login', authentication.login);
+
+app.get('/data/students', function (req, res) {
+  req.db.queryAsync('SELECT `firstname` as `firstName`, `lastname` as `lastName`, `email`, `lastlogin` as `lastLogin` FROM mdl_user WHERE `lastlogin` > 0').then(function(result) {
+    res.json({students: result[0]});
+  });
 });
 
-//app.listen(3030);
-//sendReminderEmail('andreas@stockers.org', '5 weeks');
-function daysToMilliseconds(days) {
-  return 1000 * 60 * 60 * 24 * days;
-}
-inactiveStudents(daysToMilliseconds(7), daysToMilliseconds(6 * 30)).then(function(students) {
-  console.log(students[0]);
-});
+/**
+ * Static files are served
+ */
+app.use(express.static(path.resolve(__dirname, '../app')));
+app.use('/tmp', express.static(path.resolve(__dirname, '../tmp')));
+
+app.listen(3030);

@@ -1,0 +1,5 @@
+{
+  "sessionDurationMinutes": 10,
+  "moodleHost": "localhost",
+  "moodlePath": "/moodle"
+}
