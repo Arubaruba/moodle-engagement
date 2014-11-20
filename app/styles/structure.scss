@@ -1,6 +1,27 @@
 body {
   background: #fff;
-  font-size: 20px;
+  font-size: 18px;
+}
 
+.sidebar {
+  .item {
+    color: white;
+    text-align: center;
+    padding: 5px;
+    background: linear-gradient(to bottom, #0066ff, #0061f5);
+    border: 1px solid #004eaf;
+    border-radius: 3px;
+    margin:8px 0;
+
+    @media only screen and (max-width: 767px) {
+      float: left;
+      width: 20%;
+    }
+  }
+}
+
+.main-content {
+  box-sizing: border-box;
   padding: 20px;
+  background: green;
 }

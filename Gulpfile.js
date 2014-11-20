@@ -7,6 +7,8 @@ var gulp = require('gulp'),
   wrap = require('gulp-wrap'),
   declare = require('gulp-declare'),
   livereload = require('gulp-livereload'),
+  minifyCSS = require('gulp-minify-css'),
+  gutil = require('gulp-util'),
 
   eventStream = require('event-stream'),
   packageName = require('./package.json')['name'];
@@ -50,9 +52,10 @@ var pipes = {
       .pipe(concat(packageName + '.templates.js'));
   },
   sass: function () {
-    return gulp.src('app/**/*.scss')
-      .pipe(sass())
-      .pipe(concat(packageName + '.css'));
+    return eventStream.merge(
+      gulp.src('bower_components/skeleton/stylesheets/*.css'),
+      gulp.src('app/**/*.scss').pipe(sass())
+    ).pipe(concat(packageName + '.css')).pipe(minifyCSS());
   }
 };
 
@@ -67,15 +70,24 @@ gulp.task('default', function () {
   ).pipe(gulp.dest(buildPaths.development));
 
   gulp.watch('app/**/*.js', function () {
-    pipes.localScripts().pipe(gulp.dest(buildPaths.development)).pipe(livereload());
+    pipes.localScripts()
+      .pipe(gulp.dest(buildPaths.development))
+      .pipe(livereload())
+      .on('error', gutil.log);
   });
 
   gulp.watch('app/**/*.hbs', function () {
-    pipes.templates().pipe(gulp.dest(buildPaths.development)).pipe(livereload());
+    pipes.templates()
+      .pipe(gulp.dest(buildPaths.development))
+      .pipe(livereload())
+      .on('error', gutil.log);
   });
 
   gulp.watch('app/**/*.scss', function () {
-    pipes.sass().pipe(gulp.dest(buildPaths.development)).pipe(livereload());
+    pipes.sass()
+      .pipe(gulp.dest(buildPaths.development))
+      .pipe(livereload())
+      .on('error', gutil.log);
   });
 });
 
