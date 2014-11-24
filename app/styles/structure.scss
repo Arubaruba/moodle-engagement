@@ -1,27 +1,67 @@
 body {
+  color: #333;
   background: #fff;
   font-size: 18px;
 }
 
-.sidebar {
-  .item {
-    color: white;
-    text-align: center;
-    padding: 5px;
-    background: linear-gradient(to bottom, #0066ff, #0061f5);
-    border: 1px solid #004eaf;
-    border-radius: 3px;
-    margin:8px 0;
+.title {
+  padding: 30px;
+}
 
-    @media only screen and (max-width: 767px) {
-      float: left;
-      width: 20%;
+.button-1 {
+  background: linear-gradient(to bottom, #0066ff, #0061f5);
+  border: 1px solid #004eaf;
+  border-radius: 2px;
+  color: #fff;
+  text-shadow: none;
+}
+
+.top-bar {
+
+  .sign-out {
+    padding: 8px;
+    margin-top: 6px;
+    margin-right: 6px;
+    text-align: center;
+  }
+
+  @media only screen and (min-width: 650px) {
+    .sign-out {
+      float: right;
+      display: inline-block;
+    }
+    .item {
+      display: inline-block;
+    }
+  }
+
+  @media only screen and (min-width: 650px) and (max-width: 750px) {
+    .item {
+      width: 49%;
+    }
+  }
+
+  background: #dddddd;
+
+  .item {
+    font-size: 22px;
+    text-align: center;
+    padding: 15px;
+    box-sizing: border-box;
+
+    &.active {
+      background: #eeeeee;
+      color: #888;
+      &:hover {
+        cursor: default;
+      }
+    }
+    &:hover {
+      cursor: pointer;
     }
   }
 }
 
-.main-content {
-  box-sizing: border-box;
-  padding: 20px;
-  background: green;
+.red {
+  border: 1px solid #0c00ff;
 }

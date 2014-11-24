@@ -42,7 +42,7 @@ var pipes = {
     ])
       .pipe(handlebars({
         handlebars: require('ember-handlebars')
-      }))
+      }).on('error', gutil.log))
       .pipe(wrap('Ember.Handlebars.template(<%= contents %>)'))
       .pipe(declare({
         namespace: 'Ember.TEMPLATES',
@@ -54,7 +54,7 @@ var pipes = {
   sass: function () {
     return eventStream.merge(
       gulp.src('bower_components/skeleton/stylesheets/*.css'),
-      gulp.src('app/**/*.scss').pipe(sass())
+      gulp.src('app/**/*.scss').pipe(sass().on('error', gutil.log))
     ).pipe(concat(packageName + '.css')).pipe(minifyCSS());
   }
 };

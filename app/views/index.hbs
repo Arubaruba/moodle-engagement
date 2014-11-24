@@ -1,16 +1,26 @@
-<table>
-  <tr>
-    <th>First Name</th>
-    <th>Last Name</th>
-    <th>Email</th>
-    <th>Last Login</th>
-  </tr>
-  {{#each}}
-    <tr>
-      <td>{{firstName}}</td>
-      <td>{{lastName}}</td>
-      <td>{{email}}</td>
-      <td>{{lastLogin}}</td>
-    </tr>
-  {{/each}}
-</table>
+<div class="container">
+	<div class="three columns">
+		<div class="one column alpha red">
+			a
+		</div>
+		<div class="one column red">
+			a
+		</div>
+		<table class="one column omega">
+			<tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Last Login</th>
+			</tr>
+      {{#each}}
+				<tr>
+					<td>{{firstName}}</td>
+					<td>{{lastName}}</td>
+					<td>{{email}}</td>
+					<td>{{lastLogin}}</td>
+				</tr>
+      {{/each}}
+		</table>
+	</div>
+</div>
