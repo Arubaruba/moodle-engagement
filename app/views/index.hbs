@@ -1,26 +1,35 @@
-<div class="container">
-	<div class="three columns">
-		<div class="one column alpha red">
-			a
-		</div>
-		<div class="one column red">
-			a
-		</div>
-		<table class="one column omega">
-			<tr>
-				<th>First Name</th>
-				<th>Last Name</th>
-				<th>Email</th>
-				<th>Last Login</th>
-			</tr>
-      {{#each}}
-				<tr>
-					<td>{{firstName}}</td>
-					<td>{{lastName}}</td>
-					<td>{{email}}</td>
-					<td>{{lastLogin}}</td>
-				</tr>
-      {{/each}}
-		</table>
-	</div>
+<div class="index">
+  <div class="sixteen columns least-active-students">
+    <div>
+      <a class="button-1 medium report-students" href="">Report {{this.length}} Students</a>
+      <h2>Least Active Students</h2>
+      <div>
+        <select class="small" name="" id="">
+          <option value="">All Classes</option>
+          <option value="">Intro to ..</option>
+        </select>
+      </div>
+      <table class="table-1">
+        <tr class="headings">
+          <th>Name</th>
+          <th>
+            <select name="" id="">
+              <option value="">1 Week</option>
+              <option value="">2 Month<option>
+            </select>
+            Last Login
+          </th>
+        </tr>
+        {{#each}}
+          <tr>
+            <td>{{fullName}}</td>
+            <td>{{lastLogin}}</td>
+          </tr>
+        {{/each}}
+        <tr class="show-more">
+          <td colspan="100%">Show All</td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </div>
