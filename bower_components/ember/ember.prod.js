@@ -1972,7 +1972,7 @@ enifed("ember-application",
 
     @module ember
     @submodule ember-application
-    @requires ember-views, ember-routing
+    @requires ember-templates, ember-routing
     */
 
     var DAG = __dependency3__["default"];
@@ -2163,7 +2163,7 @@ enifed("ember-application/ext/controller",
     __exports__["default"] = ControllerMixin;
   });
 enifed("ember-application/system/application",
-  ["ember-metal","ember-metal/property_get","ember-metal/property_set","ember-runtime/system/lazy_load","ember-application/system/dag","ember-runtime/system/namespace","ember-runtime/mixins/deferred","ember-application/system/resolver","ember-metal/platform","ember-metal/run_loop","ember-metal/utils","container/container","ember-runtime/controllers/controller","ember-metal/enumerable_utils","ember-runtime/controllers/object_controller","ember-runtime/controllers/array_controller","ember-handlebars/controls/select","ember-views/system/event_dispatcher","ember-views/system/jquery","ember-routing/system/route","ember-routing/system/router","ember-routing/location/hash_location","ember-routing/location/history_location","ember-routing/location/auto_location","ember-routing/location/none_location","ember-routing/system/cache","ember-metal/core","ember-handlebars-compiler","exports"],
+  ["ember-metal","ember-metal/property_get","ember-metal/property_set","ember-runtime/system/lazy_load","ember-application/system/dag","ember-runtime/system/namespace","ember-runtime/mixins/deferred","ember-application/system/resolver","ember-metal/platform","ember-metal/run_loop","ember-metal/utils","container/container","ember-runtime/controllers/controller","ember-metal/enumerable_utils","ember-runtime/controllers/object_controller","ember-runtime/controllers/array_controller","ember-handlebars/controls/select","ember-templates/system/event_dispatcher","ember-templates/system/jquery","ember-routing/system/route","ember-routing/system/router","ember-routing/location/hash_location","ember-routing/location/history_location","ember-routing/location/auto_location","ember-routing/location/none_location","ember-routing/system/cache","ember-metal/core","ember-handlebars-compiler","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __dependency17__, __dependency18__, __dependency19__, __dependency20__, __dependency21__, __dependency22__, __dependency23__, __dependency24__, __dependency25__, __dependency26__, __dependency27__, __dependency28__, __exports__) {
     "use strict";
     /**
@@ -2262,7 +2262,7 @@ enifed("ember-application/system/application",
       listener on the `body`.
 
       If a `mousedown` event occurs, Ember will look at the target of the event and
-      start walking up the DOM node tree, finding corresponding views and invoking
+      start walking up the DOM node tree, finding corresponding templates and invoking
       their `mouseDown` method as it goes.
 
       `Ember.Application` has a number of default events that it listens for, as
@@ -2298,9 +2298,9 @@ enifed("ember-application/system/application",
       ```
 
       The `rootElement` can be either a DOM element or a jQuery-compatible selector
-      string. Note that *views appended to the DOM outside the root element will
+      string. Note that *templates appended to the DOM outside the root element will
       not receive events.* If you specify a custom root element, make sure you only
-      append views inside it!
+      append templates inside it!
 
       To learn more about the advantages of event delegation and the Ember view
       layer, and a list of the event listeners that are setup by default, visit the
@@ -2376,7 +2376,7 @@ enifed("ember-application/system/application",
 
       /**
         The `Ember.EventDispatcher` responsible for delegating events to this
-        application's views.
+        application's templates.
 
         The event dispatcher is created by the application at initialization time
         and sets up event listeners on the DOM element described by the
@@ -2399,7 +2399,7 @@ enifed("ember-application/system/application",
         instances.
 
         If you would like additional bubbling events to be delegated to your
-        views, set your `Ember.Application`'s `customEvents` property
+        templates, set your `Ember.Application`'s `customEvents` property
         to a hash containing the DOM event name as the key and the
         corresponding view method name as the value. For example:
 
@@ -3086,7 +3086,7 @@ enifed("ember-application/system/application",
 
         It also configures the container:
 
-        * registered views are created every time they are looked up (they are
+        * registered templates are created every time they are looked up (they are
           not singletons)
         * registered templates are not factories; the registered value is
           returned directly.
@@ -4537,8 +4537,8 @@ enifed("ember-handlebars-compiler",
       @param {String} dependentKeys*
     */
     EmberHandlebars.helper = function(name, value) {
-      if (!View) { View = requireModule('ember-views/views/view')['default']; } // ES6TODO: stupid circular dep
-      if (!Component) { Component = requireModule('ember-views/views/component')['default']; } // ES6TODO: stupid circular dep
+      if (!View) { View = requireModule('ember-templates/templates/view')['default']; } // ES6TODO: stupid circular dep
+      if (!Component) { Component = requireModule('ember-templates/templates/component')['default']; } // ES6TODO: stupid circular dep
 
       
       if (View.detect(value)) {
@@ -4750,7 +4750,7 @@ enifed("ember-handlebars-compiler",
     __exports__["default"] = EmberHandlebars;
   });
 enifed("ember-handlebars",
-  ["ember-handlebars-compiler","ember-metal/core","ember-runtime/system/lazy_load","ember-handlebars/loader","ember-handlebars/ext","ember-handlebars/string","ember-handlebars/helpers/shared","ember-handlebars/helpers/binding","ember-handlebars/helpers/collection","ember-handlebars/helpers/view","ember-handlebars/helpers/unbound","ember-handlebars/helpers/debug","ember-handlebars/helpers/each","ember-handlebars/helpers/template","ember-handlebars/helpers/partial","ember-handlebars/helpers/yield","ember-handlebars/helpers/loc","ember-handlebars/controls/checkbox","ember-handlebars/controls/select","ember-handlebars/controls/text_area","ember-handlebars/controls/text_field","ember-handlebars/controls/text_support","ember-handlebars/controls","ember-handlebars/component_lookup","ember-handlebars/views/handlebars_bound_view","ember-handlebars/views/metamorph_view","exports"],
+  ["ember-handlebars-compiler","ember-metal/core","ember-runtime/system/lazy_load","ember-handlebars/loader","ember-handlebars/ext","ember-handlebars/string","ember-handlebars/helpers/shared","ember-handlebars/helpers/binding","ember-handlebars/helpers/collection","ember-handlebars/helpers/view","ember-handlebars/helpers/unbound","ember-handlebars/helpers/debug","ember-handlebars/helpers/each","ember-handlebars/helpers/template","ember-handlebars/helpers/partial","ember-handlebars/helpers/yield","ember-handlebars/helpers/loc","ember-handlebars/controls/checkbox","ember-handlebars/controls/select","ember-handlebars/controls/text_area","ember-handlebars/controls/text_field","ember-handlebars/controls/text_support","ember-handlebars/controls","ember-handlebars/component_lookup","ember-handlebars/templates/handlebars_bound_view","ember-handlebars/templates/metamorph_view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __dependency17__, __dependency18__, __dependency19__, __dependency20__, __dependency21__, __dependency22__, __dependency23__, __dependency24__, __dependency25__, __dependency26__, __exports__) {
     "use strict";
     var EmberHandlebars = __dependency1__["default"];
@@ -5356,7 +5356,7 @@ enifed("ember-handlebars/controls",
     __exports__.textareaHelper = textareaHelper;
   });
 enifed("ember-handlebars/controls/checkbox",
-  ["ember-metal/property_get","ember-metal/property_set","ember-views/views/view","exports"],
+  ["ember-metal/property_get","ember-metal/property_set","ember-templates/templates/view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
     var get = __dependency1__.get;
@@ -5432,7 +5432,7 @@ enifed("ember-handlebars/controls/checkbox",
     });
   });
 enifed("ember-handlebars/controls/select",
-  ["ember-handlebars-compiler","ember-metal/enumerable_utils","ember-metal/property_get","ember-metal/property_set","ember-views/views/view","ember-views/views/collection_view","ember-metal/utils","ember-metal/is_none","ember-metal/computed","ember-runtime/system/native_array","ember-metal/mixin","ember-metal/properties","exports"],
+  ["ember-handlebars-compiler","ember-metal/enumerable_utils","ember-metal/property_get","ember-metal/property_set","ember-templates/templates/view","ember-templates/templates/collection_view","ember-metal/utils","ember-metal/is_none","ember-metal/computed","ember-runtime/system/native_array","ember-metal/mixin","ember-metal/properties","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __exports__) {
     "use strict";
     /**
@@ -6114,7 +6114,7 @@ enifed("ember-handlebars/controls/select",
     __exports__.SelectOptgroup = SelectOptgroup;
   });
 enifed("ember-handlebars/controls/text_area",
-  ["ember-metal/property_get","ember-views/views/component","ember-handlebars/controls/text_support","ember-metal/mixin","exports"],
+  ["ember-metal/property_get","ember-templates/templates/component","ember-handlebars/controls/text_support","ember-metal/mixin","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
 
@@ -6170,7 +6170,7 @@ enifed("ember-handlebars/controls/text_area",
     });
   });
 enifed("ember-handlebars/controls/text_field",
-  ["ember-metal/property_get","ember-metal/property_set","ember-views/views/component","ember-handlebars/controls/text_support","exports"],
+  ["ember-metal/property_get","ember-metal/property_set","ember-templates/templates/component","ember-handlebars/controls/text_support","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     /**
@@ -6342,13 +6342,13 @@ enifed("ember-handlebars/controls/text_support",
 
       /**
         Whether the `keyUp` event that triggers an `action` to be sent continues
-        propagating to other views.
+        propagating to other templates.
 
         By default, when the user presses the return key on their keyboard and
         the text field has an `action` set, the action will be sent to the view's
         controller and the key event will stop propagating.
 
-        If you would like parent views to receive the `keyUp` event even after an
+        If you would like parent templates to receive the `keyUp` event even after an
         action has been dispatched, set `bubbles` to true.
 
         @property bubbles
@@ -6467,7 +6467,7 @@ enifed("ember-handlebars/controls/text_support",
     __exports__["default"] = TextSupport;
   });
 enifed("ember-handlebars/ext",
-  ["ember-metal/core","ember-runtime/system/string","ember-handlebars-compiler","ember-metal/property_get","ember-metal/error","ember-metal/mixin","ember-views/views/view","ember-handlebars/views/metamorph_view","ember-metal/path_cache","ember-metal/is_empty","ember-metal/cache","exports"],
+  ["ember-metal/core","ember-runtime/system/string","ember-handlebars-compiler","ember-metal/property_get","ember-metal/error","ember-metal/mixin","ember-templates/templates/view","ember-handlebars/templates/metamorph_view","ember-metal/path_cache","ember-metal/is_empty","ember-metal/cache","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -6908,7 +6908,7 @@ enifed("ember-handlebars/ext",
       ## Use with blocks not supported
 
       Bound helpers do not support use with Handlebars blocks or
-      the addition of child views of any kind.
+      the addition of child templates of any kind.
 
       @method registerBoundHelper
       @for Ember.Handlebars
@@ -6948,7 +6948,7 @@ enifed("ember-handlebars/ext",
       @since 1.2.0
     */
     function makeBoundHelper(fn) {
-      if (!SimpleHandlebarsView) { SimpleHandlebarsView = requireModule('ember-handlebars/views/handlebars_bound_view')['SimpleHandlebarsView']; } // ES6TODO: stupid circular dep
+      if (!SimpleHandlebarsView) { SimpleHandlebarsView = requireModule('ember-handlebars/templates/handlebars_bound_view')['SimpleHandlebarsView']; } // ES6TODO: stupid circular dep
 
       var dependentKeys = slice.call(arguments, 1);
 
@@ -7130,7 +7130,7 @@ enifed("ember-handlebars/ext",
     __exports__.evaluateUnboundHelper = evaluateUnboundHelper;
   });
 enifed("ember-handlebars/helpers/binding",
-  ["ember-metal/core","ember-handlebars-compiler","ember-metal/property_get","ember-metal/property_set","ember-metal/utils","ember-runtime/system/string","ember-metal/platform","ember-metal/is_none","ember-metal/enumerable_utils","ember-metal/array","ember-views/views/view","ember-metal/run_loop","ember-metal/observer","ember-metal/binding","ember-views/system/jquery","ember-handlebars/ext","ember-metal/keys","ember-metal/cache","ember-handlebars/views/handlebars_bound_view","exports"],
+  ["ember-metal/core","ember-handlebars-compiler","ember-metal/property_get","ember-metal/property_set","ember-metal/utils","ember-runtime/system/string","ember-metal/platform","ember-metal/is_none","ember-metal/enumerable_utils","ember-metal/array","ember-templates/templates/view","ember-metal/run_loop","ember-metal/observer","ember-metal/binding","ember-templates/system/jquery","ember-handlebars/ext","ember-metal/keys","ember-metal/cache","ember-handlebars/templates/handlebars_bound_view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __dependency17__, __dependency18__, __dependency19__, __exports__) {
     "use strict";
     /**
@@ -7912,7 +7912,7 @@ enifed("ember-handlebars/helpers/binding",
           view.registerObserver(normalized.root, normalized.path, observer);
         }
 
-        // if this changes, also change the logic in ember-views/lib/views/view.js
+        // if this changes, also change the logic in ember-templates/lib/templates/view.js
         if ((type === 'string' || (type === 'number' && !isNaN(value)))) {
           ret.push(attr + '="' + Handlebars.Utils.escapeExpression(value) + '"');
         } else if (value && type === 'boolean') {
@@ -8069,7 +8069,7 @@ enifed("ember-handlebars/helpers/binding",
     __exports__.bindClasses = bindClasses;
   });
 enifed("ember-handlebars/helpers/collection",
-  ["ember-metal/core","ember-metal/utils","ember-handlebars-compiler","ember-runtime/system/string","ember-metal/property_get","ember-handlebars/ext","ember-handlebars/helpers/view","ember-metal/computed","ember-views/views/collection_view","exports"],
+  ["ember-metal/core","ember-metal/utils","ember-handlebars-compiler","ember-runtime/system/string","ember-metal/property_get","ember-handlebars/ext","ember-handlebars/helpers/view","ember-metal/computed","ember-templates/templates/collection_view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __exports__) {
     "use strict";
     /**
@@ -8194,7 +8194,7 @@ enifed("ember-handlebars/helpers/collection",
 
       As with the `{{view}}`, helper options passed to the `{{collection}}` will be
       set on the resulting `Ember.CollectionView` as properties. Additionally,
-      options prefixed with `item` will be applied to the views rendered for each
+      options prefixed with `item` will be applied to the templates rendered for each
       item (note the camelcasing):
 
       ```handlebars
@@ -8270,7 +8270,7 @@ enifed("ember-handlebars/helpers/collection",
       delete hash.itemView;
 
       // Go through options passed to the {{collection}} helper and extract options
-      // that configure item views instead of the collection itself.
+      // that configure item templates instead of the collection itself.
       for (var prop in hash) {
         if (hash.hasOwnProperty(prop)) {
           match = prop.match(/^item(.)(.*)$/);
@@ -8425,7 +8425,7 @@ enifed("ember-handlebars/helpers/debug",
     __exports__.debuggerHelper = debuggerHelper;
   });
 enifed("ember-handlebars/helpers/each",
-  ["ember-metal/core","ember-handlebars-compiler","ember-runtime/system/string","ember-metal/property_get","ember-metal/property_set","ember-views/views/collection_view","ember-metal/binding","ember-runtime/mixins/controller","ember-runtime/controllers/array_controller","ember-runtime/mixins/array","ember-runtime/copy","ember-metal/run_loop","ember-metal/events","ember-handlebars/ext","ember-metal/computed","ember-metal/observer","ember-handlebars/views/metamorph_view","exports"],
+  ["ember-metal/core","ember-handlebars-compiler","ember-runtime/system/string","ember-metal/property_get","ember-metal/property_set","ember-templates/templates/collection_view","ember-metal/binding","ember-runtime/mixins/controller","ember-runtime/controllers/array_controller","ember-runtime/mixins/array","ember-runtime/copy","ember-metal/run_loop","ember-metal/events","ember-handlebars/ext","ember-metal/computed","ember-metal/observer","ember-handlebars/templates/metamorph_view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __dependency17__, __exports__) {
     "use strict";
 
@@ -9166,7 +9166,7 @@ enifed("ember-handlebars/helpers/unbound",
     }
   });
 enifed("ember-handlebars/helpers/view",
-  ["ember-metal/core","ember-runtime/system/object","ember-metal/property_get","ember-metal/property_set","ember-metal/mixin","ember-views/system/jquery","ember-views/views/view","ember-metal/binding","ember-metal/keys","ember-handlebars/ext","ember-runtime/system/string","exports"],
+  ["ember-metal/core","ember-runtime/system/object","ember-metal/property_get","ember-metal/property_set","ember-metal/mixin","ember-templates/system/jquery","ember-templates/templates/view","ember-metal/binding","ember-metal/keys","ember-handlebars/ext","ember-runtime/system/string","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __exports__) {
     "use strict";
     /*globals Handlebars */
@@ -9699,7 +9699,7 @@ enifed("ember-handlebars/helpers/yield",
     }
   });
 enifed("ember-handlebars/loader",
-  ["ember-handlebars/component_lookup","ember-views/system/jquery","ember-metal/error","ember-runtime/system/lazy_load","ember-handlebars-compiler","exports"],
+  ["ember-handlebars/component_lookup","ember-templates/system/jquery","ember-metal/error","ember-runtime/system/lazy_load","ember-handlebars-compiler","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     /*globals Handlebars */
@@ -9724,7 +9724,7 @@ enifed("ember-handlebars/loader",
       Script tags with `text/x-handlebars` will be compiled
       with Ember's Handlebars and are suitable for use as a view's template.
       Those with type `text/x-raw-handlebars` will be compiled with regular
-      Handlebars and are suitable for use in views' computed properties.
+      Handlebars and are suitable for use in templates' computed properties.
 
       @private
       @method bootstrap
@@ -9847,8 +9847,8 @@ enifed("ember-handlebars/string",
 
     __exports__["default"] = htmlSafe;
   });
-enifed("ember-handlebars/views/handlebars_bound_view",
-  ["ember-handlebars-compiler","ember-metal/core","ember-metal/error","ember-metal/property_get","ember-metal/property_set","ember-metal/merge","ember-metal/run_loop","ember-views/views/view","ember-handlebars/string","ember-views/views/states","ember-handlebars/views/metamorph_view","ember-handlebars/ext","ember-metal/utils","exports"],
+enifed("ember-handlebars/templates/handlebars_bound_view",
+  ["ember-handlebars-compiler","ember-metal/core","ember-metal/error","ember-metal/property_get","ember-metal/property_set","ember-metal/merge","ember-metal/run_loop","ember-templates/templates/view","ember-handlebars/string","ember-templates/templates/states","ember-handlebars/templates/metamorph_view","ember-handlebars/ext","ember-metal/utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __exports__) {
     "use strict";
     /*globals Handlebars, Metamorph:true */
@@ -10194,8 +10194,8 @@ enifed("ember-handlebars/views/handlebars_bound_view",
     __exports__._HandlebarsBoundView = _HandlebarsBoundView;
     __exports__.SimpleHandlebarsView = SimpleHandlebarsView;
   });
-enifed("ember-handlebars/views/metamorph_view",
-  ["ember-metal/core","ember-views/views/core_view","ember-views/views/view","ember-metal/mixin","ember-metal/run_loop","exports"],
+enifed("ember-handlebars/templates/metamorph_view",
+  ["ember-metal/core","ember-templates/templates/core_view","ember-templates/templates/view","ember-metal/mixin","ember-metal/run_loop","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     /* global Metamorph:true */
@@ -10256,14 +10256,14 @@ enifed("ember-handlebars/views/metamorph_view",
     var _SimpleMetamorphView = CoreView.extend(_Metamorph);
     __exports__._SimpleMetamorphView = _SimpleMetamorphView;__exports__["default"] = View.extend(_Metamorph);
   });
-enifed("ember-metal-views",
-  ["ember-metal-views/renderer","exports"],
+enifed("ember-metal-templates",
+  ["ember-metal-templates/renderer","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
     var Renderer = __dependency1__["default"];
     __exports__.Renderer = Renderer;
   });
-enifed("ember-metal-views/renderer",
+enifed("ember-metal-templates/renderer",
   ["morph","exports"],
   function(__dependency1__, __exports__) {
     "use strict";
@@ -17832,7 +17832,7 @@ enifed("ember-metal/run_loop",
 
     /**
       Runs the passed target and method inside of a RunLoop, ensuring any
-      deferred actions including bindings and views updates are flushed at the
+      deferred actions including bindings and templates updates are flushed at the
       end.
 
       Normally you should not need to invoke this method yourself. However if
@@ -18067,7 +18067,7 @@ enifed("ember-metal/run_loop",
 
       You should call this method anytime you need any changed state to propagate
       throughout the app immediately without repainting the UI (which happens
-      in the later 'render' queue added by the `ember-views` package).
+      in the later 'render' queue added by the `ember-templates` package).
 
       ```javascript
       run.sync();
@@ -18200,7 +18200,7 @@ enifed("ember-metal/run_loop",
       For instance, if you'd like to schedule an operation to happen
       after all DOM element operations have completed within the current
       run loop, you can make use of the `afterRender` run loop queue (added
-      by the `ember-views` package, along with the preceding `render` queue
+      by the `ember-templates` package, along with the preceding `render` queue
       where all the DOM element operations happen). Example:
 
       ```javascript
@@ -19620,7 +19620,7 @@ enifed("ember-routing-handlebars",
     __exports__["default"] = Ember;
   });
 enifed("ember-routing-handlebars/helpers/action",
-  ["ember-metal/core","ember-metal/property_get","ember-metal/array","ember-metal/utils","ember-metal/run_loop","ember-views/system/utils","ember-views/system/action_manager","ember-routing/system/router","ember-handlebars","ember-handlebars/ext","ember-handlebars/helpers/view","ember-routing-handlebars/helpers/shared","exports"],
+  ["ember-metal/core","ember-metal/property_get","ember-metal/array","ember-metal/utils","ember-metal/run_loop","ember-templates/system/utils","ember-templates/system/action_manager","ember-routing/system/router","ember-handlebars","ember-handlebars/ext","ember-handlebars/helpers/view","ember-routing-handlebars/helpers/shared","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -19961,7 +19961,7 @@ enifed("ember-routing-handlebars/helpers/action",
     __exports__.actionHelper = actionHelper;
   });
 enifed("ember-routing-handlebars/helpers/link_to",
-  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-metal/merge","ember-metal/run_loop","ember-metal/computed","ember-runtime/system/lazy_load","ember-runtime/system/string","ember-runtime/system/object","ember-metal/keys","ember-views/system/utils","ember-views/views/component","ember-handlebars","ember-handlebars/helpers/view","ember-routing/system/router","ember-routing-handlebars/helpers/shared","exports"],
+  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-metal/merge","ember-metal/run_loop","ember-metal/computed","ember-runtime/system/lazy_load","ember-runtime/system/string","ember-runtime/system/object","ember-metal/keys","ember-templates/system/utils","ember-templates/templates/component","ember-handlebars","ember-handlebars/helpers/view","ember-routing/system/router","ember-routing-handlebars/helpers/shared","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -20947,7 +20947,7 @@ enifed("ember-routing-handlebars/helpers/link_to",
     __exports__.linkToHelper = linkToHelper;
   });
 enifed("ember-routing-handlebars/helpers/outlet",
-  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-runtime/system/lazy_load","ember-views/views/container_view","ember-handlebars/views/metamorph_view","ember-handlebars/helpers/view","exports"],
+  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-runtime/system/lazy_load","ember-templates/templates/container_view","ember-handlebars/templates/metamorph_view","ember-handlebars/helpers/view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -21732,7 +21732,7 @@ enifed("ember-routing/ext/run_loop",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     // Add a new named queue after the 'actions' queue (where RSVP promises
@@ -21744,7 +21744,7 @@ enifed("ember-routing/ext/run_loop",
     run._addQueue('routerTransitions', 'actions');
   });
 enifed("ember-routing/ext/view",
-  ["ember-metal/property_get","ember-metal/property_set","ember-metal/run_loop","ember-views/views/view","exports"],
+  ["ember-metal/property_get","ember-metal/property_set","ember-metal/run_loop","ember-templates/templates/view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     var get = __dependency1__.get;
@@ -22637,7 +22637,7 @@ enifed("ember-routing/location/hash_location",
     });
   });
 enifed("ember-routing/location/history_location",
-  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-metal/utils","ember-runtime/system/object","ember-views/system/jquery","exports"],
+  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-metal/utils","ember-runtime/system/object","ember-templates/system/jquery","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -23671,7 +23671,7 @@ enifed("ember-routing/system/route",
         successfully been completed. This occurs after the normal model
         hooks (`beforeModel`, `model`, `afterModel`, `setupController`)
         have resolved. The `didTransition` action has no arguments,
-        however, it can be useful for tracking page views or resetting
+        however, it can be useful for tracking page templates or resetting
         state on the controller.
 
         ```js
@@ -25192,7 +25192,7 @@ enifed("ember-routing/system/route",
     __exports__["default"] = Route;
   });
 enifed("ember-routing/system/router",
-  ["ember-metal/core","ember-metal/error","ember-metal/property_get","ember-metal/property_set","ember-metal/properties","ember-metal/computed","ember-metal/merge","ember-metal/run_loop","ember-metal/enumerable_utils","ember-runtime/system/string","ember-runtime/system/object","ember-runtime/mixins/evented","ember-routing/system/dsl","ember-views/views/view","ember-routing/location/api","ember-handlebars/views/metamorph_view","ember-routing-handlebars/helpers/shared","ember-metal/platform","exports"],
+  ["ember-metal/core","ember-metal/error","ember-metal/property_get","ember-metal/property_set","ember-metal/properties","ember-metal/computed","ember-metal/merge","ember-metal/run_loop","ember-metal/enumerable_utils","ember-runtime/system/string","ember-runtime/system/object","ember-runtime/mixins/evented","ember-routing/system/dsl","ember-templates/templates/view","ember-routing/location/api","ember-handlebars/templates/metamorph_view","ember-routing-handlebars/helpers/shared","ember-metal/platform","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __dependency17__, __dependency18__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -25226,7 +25226,7 @@ enifed("ember-routing/system/router",
     // // side effect of loading some Ember globals, for now
     // requireModule("ember-handlebars");
     // requireModule("ember-runtime");
-    // requireModule("ember-views");
+    // requireModule("ember-templates");
 
     var Router = requireModule("router")['default'];
     var Transition = requireModule("router/transition").Transition;
@@ -32072,7 +32072,7 @@ enifed("ember-runtime/mixins/observable",
 
       Properties and observers allow one object to observe changes to a
       property on another object. This is one of the fundamental ways that
-      models, controllers and views communicate with each other in an Ember
+      models, controllers and templates communicate with each other in an Ember
       application.
 
       Any object that has this mixin applied can be used in observer
@@ -36586,17 +36586,17 @@ enifed("ember-runtime/system/tracked_array",
       this.rangeStart = rangeStart;
     }
   });
-enifed("ember-views",
-  ["ember-runtime","ember-views/system/jquery","ember-views/system/utils","ember-views/system/render_buffer","ember-views/system/ext","ember-views/views/states","ember-views/views/core_view","ember-views/views/view","ember-views/views/container_view","ember-views/views/collection_view","ember-views/views/component","ember-views/system/event_dispatcher","ember-views/mixins/view_target_action_support","exports"],
+enifed("ember-templates",
+  ["ember-runtime","ember-templates/system/jquery","ember-templates/system/utils","ember-templates/system/render_buffer","ember-templates/system/ext","ember-templates/templates/states","ember-templates/templates/core_view","ember-templates/templates/view","ember-templates/templates/container_view","ember-templates/templates/collection_view","ember-templates/templates/component","ember-templates/system/event_dispatcher","ember-templates/mixins/view_target_action_support","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __exports__) {
     "use strict";
     /**
     Ember Views
 
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     @requires ember-runtime
-    @main ember-views
+    @main ember-templates
     */
 
     // BEGIN IMPORTS
@@ -36647,7 +36647,7 @@ enifed("ember-views",
 
     __exports__["default"] = Ember;
   });
-enifed("ember-views/mixins/component_template_deprecation",
+enifed("ember-templates/mixins/component_template_deprecation",
   ["ember-metal/core","ember-metal/property_get","ember-metal/mixin","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
@@ -36714,7 +36714,7 @@ enifed("ember-views/mixins/component_template_deprecation",
       }
     });
   });
-enifed("ember-views/mixins/view_target_action_support",
+enifed("ember-templates/mixins/view_target_action_support",
   ["ember-metal/mixin","ember-runtime/mixins/target_action_support","ember-metal/computed","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
@@ -36777,13 +36777,13 @@ enifed("ember-views/mixins/view_target_action_support",
       actionContext: alias('context')
     });
   });
-enifed("ember-views/system/action_manager",
+enifed("ember-templates/system/action_manager",
   ["exports"],
   function(__exports__) {
     "use strict";
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     function ActionManager() {}
@@ -36799,13 +36799,13 @@ enifed("ember-views/system/action_manager",
 
     __exports__["default"] = ActionManager;
   });
-enifed("ember-views/system/event_dispatcher",
-  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-metal/is_none","ember-metal/run_loop","ember-metal/utils","ember-runtime/system/string","ember-runtime/system/object","ember-views/system/jquery","ember-views/system/action_manager","ember-views/views/view","ember-metal/merge","exports"],
+enifed("ember-templates/system/event_dispatcher",
+  ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-metal/is_none","ember-metal/run_loop","ember-metal/utils","ember-runtime/system/string","ember-runtime/system/object","ember-templates/system/jquery","ember-templates/system/action_manager","ember-templates/templates/view","ember-metal/merge","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __exports__) {
     "use strict";
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
     var Ember = __dependency1__["default"];
     // Ember.assert
@@ -36823,7 +36823,7 @@ enifed("ember-views/system/event_dispatcher",
     var merge = __dependency12__["default"];
 
     //ES6TODO:
-    // find a better way to do Ember.View.views without global state
+    // find a better way to do Ember.View.templates without global state
 
     /**
       `Ember.EventDispatcher` handles delegating browser events to their
@@ -37047,25 +37047,25 @@ enifed("ember-views/system/event_dispatcher",
       }
     });
   });
-enifed("ember-views/system/ext",
+enifed("ember-templates/system/ext",
   ["ember-metal/run_loop"],
   function(__dependency1__) {
     "use strict";
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var run = __dependency1__["default"];
 
-    // Add a new named queue for rendering views that happens
+    // Add a new named queue for rendering templates that happens
     // after bindings have synced, and a queue for scheduling actions
     // that that should occur after view rendering.
     var queues = run.queues;
     run._addQueue('render', 'actions');
     run._addQueue('afterRender', 'render');
   });
-enifed("ember-views/system/jquery",
+enifed("ember-templates/system/jquery",
   ["ember-metal/core","ember-runtime/system/string","ember-metal/enumerable_utils","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __exports__) {
     "use strict";
@@ -37080,9 +37080,9 @@ enifed("ember-views/system/jquery",
     Ember Views
 
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     @requires ember-runtime
-    @main ember-views
+    @main ember-templates
     */
 
     var jQuery = (Ember.imports && Ember.imports.jQuery) || (this && this.jQuery);
@@ -37093,7 +37093,7 @@ enifed("ember-views/system/jquery",
     
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
     if (jQuery) {
       // http://www.whatwg.org/specs/web-apps/current-work/multipage/dnd.html#dndevents
@@ -37108,13 +37108,13 @@ enifed("ember-views/system/jquery",
 
     __exports__["default"] = jQuery;
   });
-enifed("ember-views/system/render_buffer",
-  ["ember-views/system/jquery","morph","ember-metal/core","ember-metal/platform","exports"],
+enifed("ember-templates/system/render_buffer",
+  ["ember-templates/system/jquery","morph","ember-metal/core","ember-metal/platform","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var jQuery = __dependency1__["default"];
@@ -37695,8 +37695,8 @@ enifed("ember-views/system/render_buffer",
       }
     };
   });
-enifed("ember-views/system/renderer",
-  ["ember-metal/core","ember-metal-views/renderer","ember-metal/platform","ember-views/system/render_buffer","ember-metal/run_loop","ember-metal/property_set","ember-metal/instrumentation","exports"],
+enifed("ember-templates/system/renderer",
+  ["ember-metal/core","ember-metal-templates/renderer","ember-metal/platform","ember-templates/system/render_buffer","ember-metal/run_loop","ember-metal/property_set","ember-metal/instrumentation","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -37866,13 +37866,13 @@ enifed("ember-views/system/renderer",
 
     __exports__["default"] = EmberRenderer;
   });
-enifed("ember-views/system/utils",
+enifed("ember-templates/system/utils",
   ["exports"],
   function(__exports__) {
     "use strict";
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     function isSimpleClick(event) {
@@ -37884,14 +37884,14 @@ enifed("ember-views/system/utils",
 
     __exports__.isSimpleClick = isSimpleClick;
   });
-enifed("ember-views/views/collection_view",
-  ["ember-metal/core","ember-metal/platform","ember-metal/binding","ember-metal/merge","ember-metal/property_get","ember-metal/property_set","ember-runtime/system/string","ember-views/views/container_view","ember-views/views/core_view","ember-views/views/view","ember-metal/mixin","ember-handlebars/ext","ember-runtime/mixins/array","exports"],
+enifed("ember-templates/templates/collection_view",
+  ["ember-metal/core","ember-metal/platform","ember-metal/binding","ember-metal/merge","ember-metal/property_get","ember-metal/property_set","ember-runtime/system/string","ember-templates/templates/container_view","ember-templates/templates/core_view","ember-templates/templates/view","ember-metal/mixin","ember-handlebars/ext","ember-runtime/mixins/array","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __exports__) {
     "use strict";
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var Ember = __dependency1__["default"];
@@ -37914,7 +37914,7 @@ enifed("ember-views/views/collection_view",
       `Ember.CollectionView` is an `Ember.View` descendent responsible for managing
       a collection (an array or array-like object) by maintaining a child view object
       and associated DOM representation for each item in the array and ensuring
-      that child views and their associated rendered HTML are updated when items in
+      that child templates and their associated rendered HTML are updated when items in
       the array are added, removed, or replaced.
 
       ## Setting content
@@ -37970,7 +37970,7 @@ enifed("ember-views/views/collection_view",
 
       Setting the `tagName` property of a `CollectionView` to any of
       "ul", "ol", "table", "thead", "tbody", "tfoot", "tr", or "select" will result
-      in the item views receiving an appropriately matched `tagName` property.
+      in the item templates receiving an appropriately matched `tagName` property.
 
       Given the following application code:
 
@@ -38008,7 +38008,7 @@ enifed("ember-views/views/collection_view",
       Ember.CollectionView.CONTAINER_MAP['article'] = 'section'
       ```
 
-      ## Programmatic creation of child views
+      ## Programmatic creation of child templates
 
       For cases where additional customization beyond the use of a single
       `itemViewClass` or `tagName` matching is required CollectionView's
@@ -38187,7 +38187,7 @@ enifed("ember-views/views/collection_view",
       /**
         Called when a mutation to the underlying content array will occur.
 
-        This method will remove any views that are no longer in the underlying
+        This method will remove any templates that are no longer in the underlying
         content array.
 
         Invokes whenever the content array itself will change.
@@ -38205,7 +38205,7 @@ enifed("ember-views/views/collection_view",
           emptyView.removeFromParent();
         }
 
-        // Loop through child views that correspond with the removed items.
+        // Loop through child templates that correspond with the removed items.
         // Note that we loop from the end of the array to the beginning because
         // we are mutating it as we go.
         var childViews = this._childViews;
@@ -38220,7 +38220,7 @@ enifed("ember-views/views/collection_view",
       /**
         Called when a mutation to the underlying content array occurs.
 
-        This method will replay that mutation against the views that compose the
+        This method will replay that mutation against the templates that compose the
         `Ember.CollectionView`, ensuring that the view reflects the model.
 
         This array observer is added in `contentDidChange`.
@@ -38303,7 +38303,7 @@ enifed("ember-views/views/collection_view",
 
     /**
       A map of parent tags to their default child tags. You can add
-      additional parent tags if you want collection views that use
+      additional parent tags if you want collection templates that use
       a particular parent tag to default to a child tag.
 
       @property CONTAINER_MAP
@@ -38324,8 +38324,8 @@ enifed("ember-views/views/collection_view",
 
     __exports__["default"] = CollectionView;
   });
-enifed("ember-views/views/component",
-  ["ember-metal/core","ember-views/mixins/component_template_deprecation","ember-runtime/mixins/target_action_support","ember-views/views/view","ember-metal/property_get","ember-metal/property_set","ember-metal/is_none","ember-metal/computed","exports"],
+enifed("ember-templates/templates/component",
+  ["ember-metal/core","ember-templates/mixins/component_template_deprecation","ember-runtime/mixins/target_action_support","ember-templates/templates/view","ember-metal/property_get","ember-metal/property_set","ember-metal/is_none","ember-metal/computed","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -38345,7 +38345,7 @@ enifed("ember-views/views/component",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     /**
@@ -38633,8 +38633,8 @@ enifed("ember-views/views/component",
 
     __exports__["default"] = Component;
   });
-enifed("ember-views/views/container_view",
-  ["ember-metal/core","ember-metal/merge","ember-runtime/mixins/mutable_array","ember-metal/property_get","ember-metal/property_set","ember-views/views/view","ember-views/views/states","ember-metal/error","ember-metal/enumerable_utils","ember-metal/computed","ember-metal/run_loop","ember-metal/properties","ember-views/system/render_buffer","ember-metal/mixin","ember-runtime/system/native_array","exports"],
+enifed("ember-templates/templates/container_view",
+  ["ember-metal/core","ember-metal/merge","ember-runtime/mixins/mutable_array","ember-metal/property_get","ember-metal/property_set","ember-templates/templates/view","ember-templates/templates/states","ember-metal/error","ember-metal/enumerable_utils","ember-metal/computed","ember-metal/run_loop","ember-metal/properties","ember-templates/system/render_buffer","ember-metal/mixin","ember-runtime/system/native_array","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -38664,18 +38664,18 @@ enifed("ember-views/views/container_view",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var states = cloneStates(EmberViewStates);
 
     /**
       A `ContainerView` is an `Ember.View` subclass that implements `Ember.MutableArray`
-      allowing programmatic management of its child views.
+      allowing programmatic management of its child templates.
 
       ## Setting Initial Child Views
 
-      The initial array of child views can be set in one of two ways. You can
+      The initial array of child templates can be set in one of two ways. You can
       provide a `childViews` property at creation time that contains instance of
       `Ember.View`:
 
@@ -38711,7 +38711,7 @@ enifed("ember-views/views/container_view",
 
       ## Adding and Removing Child Views
 
-      The container view implements `Ember.MutableArray` allowing programmatic management of its child views.
+      The container view implements `Ember.MutableArray` allowing programmatic management of its child templates.
 
       To remove a view, pass that view into a `removeObject` call on the container view.
 
@@ -38813,7 +38813,7 @@ enifed("ember-views/views/container_view",
       A `template`, `templateName`, `defaultTemplate`, `layout`, `layoutName` or
       `defaultLayout` property on a container view will not result in the template
       or layout being rendered. The HTML contents of a `Ember.ContainerView`'s DOM
-      representation will only be the rendered HTML of its child views.
+      representation will only be the rendered HTML of its child templates.
 
       @class ContainerView
       @namespace Ember
@@ -38907,9 +38907,9 @@ enifed("ember-views/views/container_view",
 
         @private
         @method childViewsWillChange
-        @param {Ember.Array} views the child views array before mutation
+        @param {Ember.Array} views the child templates array before mutation
         @param {Number} start the start position of the mutation
-        @param {Number} removed the number of child views removed
+        @param {Number} removed the number of child templates removed
       **/
       childViewsWillChange: function(views, start, removed) {
         this.propertyWillChange('childViews');
@@ -38938,10 +38938,10 @@ enifed("ember-views/views/container_view",
 
         @private
         @method childViewsDidChange
-        @param {Ember.Array} views the array of child views after the mutation has occurred
+        @param {Ember.Array} views the array of child templates after the mutation has occurred
         @param {Number} start the start position of the mutation
-        @param {Number} removed the number of child views removed
-        @param {Number} added the number of child views added
+        @param {Number} removed the number of child templates removed
+        @param {Number} added the number of child templates added
       */
       childViewsDidChange: function(views, start, removed, added) {
         if (added > 0) {
@@ -38995,7 +38995,7 @@ enifed("ember-views/views/container_view",
 
     merge(states.inBuffer, {
       childViewsDidChange: function(parentView, views, start, added) {
-        throw new EmberError('You cannot modify child views while in the inBuffer state');
+        throw new EmberError('You cannot modify child templates while in the inBuffer state');
       }
     });
 
@@ -39026,8 +39026,8 @@ enifed("ember-views/views/container_view",
 
     __exports__["default"] = ContainerView;
   });
-enifed("ember-views/views/core_view",
-  ["ember-views/system/renderer","ember-views/views/states","ember-runtime/system/object","ember-runtime/mixins/evented","ember-runtime/mixins/action_handler","ember-metal/property_get","ember-metal/property_set","ember-metal/computed","ember-metal/utils","ember-metal/instrumentation","exports"],
+enifed("ember-templates/templates/core_view",
+  ["ember-templates/system/renderer","ember-templates/templates/states","ember-runtime/system/object","ember-runtime/mixins/evented","ember-runtime/mixins/action_handler","ember-metal/property_get","ember-metal/property_set","ember-metal/computed","ember-metal/utils","ember-metal/instrumentation","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __exports__) {
     "use strict";
     var Rerender = __dependency1__["default"];
@@ -39096,7 +39096,7 @@ enifed("ember-views/views/core_view",
 
       _parentView: null,
 
-      // return the current view, not including virtual views
+      // return the current view, not including virtual templates
       concreteView: computed('parentView', function() {
         if (!this.isVirtual) { return this; }
         else { return get(this, 'parentView.concreteView'); }
@@ -39169,8 +39169,8 @@ enifed("ember-views/views/core_view",
 
     __exports__["default"] = CoreView;
   });
-enifed("ember-views/views/states",
-  ["ember-metal/platform","ember-metal/merge","ember-views/views/states/default","ember-views/views/states/pre_render","ember-views/views/states/in_buffer","ember-views/views/states/has_element","ember-views/views/states/in_dom","ember-views/views/states/destroying","exports"],
+enifed("ember-templates/templates/states",
+  ["ember-metal/platform","ember-metal/merge","ember-templates/templates/states/default","ember-templates/templates/states/pre_render","ember-templates/templates/states/in_buffer","ember-templates/templates/states/has_element","ember-templates/templates/states/in_dom","ember-templates/templates/states/destroying","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
     "use strict";
     var create = __dependency1__.create;
@@ -39210,7 +39210,7 @@ enifed("ember-views/views/states",
     };
     __exports__.states = states;
   });
-enifed("ember-views/views/states/default",
+enifed("ember-templates/templates/states/default",
   ["ember-metal/core","ember-metal/property_get","ember-metal/property_set","ember-metal/run_loop","ember-metal/error","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
@@ -39223,7 +39223,7 @@ enifed("ember-views/views/states/default",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
     __exports__["default"] = {
       // appendChild is only legal while rendering the buffer.
@@ -39254,8 +39254,8 @@ enifed("ember-views/views/states/default",
       invokeObserver: Ember.K
     };
   });
-enifed("ember-views/views/states/destroying",
-  ["ember-metal/merge","ember-metal/platform","ember-runtime/system/string","ember-views/views/states/default","ember-metal/error","exports"],
+enifed("ember-templates/templates/states/destroying",
+  ["ember-metal/merge","ember-metal/platform","ember-runtime/system/string","ember-templates/templates/states/default","ember-metal/error","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     var merge = __dependency1__["default"];
@@ -39265,7 +39265,7 @@ enifed("ember-views/views/states/destroying",
     var EmberError = __dependency5__["default"];
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var destroyingError = "You can't call %@ on a view being destroyed";
@@ -39286,8 +39286,8 @@ enifed("ember-views/views/states/destroying",
 
     __exports__["default"] = destroying;
   });
-enifed("ember-views/views/states/has_element",
-  ["ember-views/views/states/default","ember-metal/run_loop","ember-metal/merge","ember-metal/platform","ember-views/system/jquery","ember-metal/error","ember-metal/property_get","ember-metal/property_set","exports"],
+enifed("ember-templates/templates/states/has_element",
+  ["ember-templates/templates/states/default","ember-metal/run_loop","ember-metal/merge","ember-metal/platform","ember-templates/system/jquery","ember-metal/error","ember-metal/property_get","ember-metal/property_set","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __exports__) {
     "use strict";
     var _default = __dependency1__["default"];
@@ -39299,7 +39299,7 @@ enifed("ember-views/views/states/has_element",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var get = __dependency7__.get;
@@ -39360,8 +39360,8 @@ enifed("ember-views/views/states/has_element",
 
     __exports__["default"] = hasElement;
   });
-enifed("ember-views/views/states/in_buffer",
-  ["ember-views/views/states/default","ember-metal/error","ember-metal/core","ember-metal/platform","ember-metal/merge","exports"],
+enifed("ember-templates/templates/states/in_buffer",
+  ["ember-templates/templates/states/default","ember-metal/error","ember-metal/core","ember-metal/platform","ember-metal/merge","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     var _default = __dependency1__["default"];
@@ -39374,7 +39374,7 @@ enifed("ember-views/views/states/in_buffer",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var inBuffer = create(_default);
@@ -39422,8 +39422,8 @@ enifed("ember-views/views/states/in_buffer",
 
     __exports__["default"] = inBuffer;
   });
-enifed("ember-views/views/states/in_dom",
-  ["ember-metal/core","ember-metal/platform","ember-metal/merge","ember-metal/error","ember-views/views/states/has_element","exports"],
+enifed("ember-templates/templates/states/in_dom",
+  ["ember-metal/core","ember-metal/platform","ember-metal/merge","ember-metal/error","ember-templates/templates/states/has_element","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __exports__) {
     "use strict";
     var Ember = __dependency1__["default"];
@@ -39435,7 +39435,7 @@ enifed("ember-views/views/states/in_dom",
     var hasElement = __dependency5__["default"];
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
 
     var inDOM = create(hasElement);
@@ -39444,7 +39444,7 @@ enifed("ember-views/views/states/in_dom",
 
     merge(inDOM, {
       enter: function(view) {
-        if (!View) { View = requireModule('ember-views/views/view')["default"]; } // ES6TODO: this sucks. Have to avoid cycles...
+        if (!View) { View = requireModule('ember-templates/templates/view')["default"]; } // ES6TODO: this sucks. Have to avoid cycles...
 
         // Register the view for event handling. This hash is used by
         // Ember.EventDispatcher to dispatch incoming events.
@@ -39458,7 +39458,7 @@ enifed("ember-views/views/states/in_dom",
       },
 
       exit: function(view) {
-        if (!View) { View = requireModule('ember-views/views/view')["default"]; } // ES6TODO: this sucks. Have to avoid cycles...
+        if (!View) { View = requireModule('ember-templates/templates/view')["default"]; } // ES6TODO: this sucks. Have to avoid cycles...
 
         if (!this.isVirtual) delete View.views[view.elementId];
       }
@@ -39466,8 +39466,8 @@ enifed("ember-views/views/states/in_dom",
 
     __exports__["default"] = inDOM;
   });
-enifed("ember-views/views/states/pre_render",
-  ["ember-views/views/states/default","ember-metal/platform","ember-metal/merge","ember-views/system/jquery","exports"],
+enifed("ember-templates/templates/states/pre_render",
+  ["ember-templates/templates/states/default","ember-metal/platform","ember-metal/merge","ember-templates/system/jquery","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __exports__) {
     "use strict";
     var _default = __dependency1__["default"];
@@ -39477,14 +39477,14 @@ enifed("ember-views/views/states/pre_render",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
     var preRender = create(_default);
 
     __exports__["default"] = preRender;
   });
-enifed("ember-views/views/view",
-  ["ember-metal/core","ember-runtime/mixins/evented","ember-runtime/system/object","ember-metal/error","ember-metal/property_get","ember-metal/property_set","ember-metal/set_properties","ember-metal/run_loop","ember-metal/observer","ember-metal/properties","ember-metal/utils","ember-metal/computed","ember-metal/mixin","ember-metal/is_none","ember-metal/deprecate_property","ember-runtime/system/native_array","ember-runtime/system/string","ember-metal/enumerable_utils","ember-runtime/copy","ember-metal/binding","ember-metal/property_events","ember-views/system/jquery","ember-views/system/ext","ember-views/views/core_view","exports"],
+enifed("ember-templates/templates/view",
+  ["ember-metal/core","ember-runtime/mixins/evented","ember-runtime/system/object","ember-metal/error","ember-metal/property_get","ember-metal/property_set","ember-metal/set_properties","ember-metal/run_loop","ember-metal/observer","ember-metal/properties","ember-metal/utils","ember-metal/computed","ember-metal/mixin","ember-metal/is_none","ember-metal/deprecate_property","ember-runtime/system/native_array","ember-runtime/system/string","ember-metal/enumerable_utils","ember-runtime/copy","ember-metal/binding","ember-metal/property_events","ember-templates/system/jquery","ember-templates/system/ext","ember-templates/templates/core_view","exports"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__, __dependency9__, __dependency10__, __dependency11__, __dependency12__, __dependency13__, __dependency14__, __dependency15__, __dependency16__, __dependency17__, __dependency18__, __dependency19__, __dependency20__, __dependency21__, __dependency22__, __dependency23__, __dependency24__, __exports__) {
     "use strict";
     // Ember.assert, Ember.deprecate, Ember.warn, Ember.TEMPLATES,
@@ -39538,7 +39538,7 @@ enifed("ember-views/views/view",
 
     /**
     @module ember
-    @submodule ember-views
+    @submodule ember-templates
     */
     var childViewsProperty = computed(function() {
       var childViews = this._childViews;
@@ -39897,7 +39897,7 @@ enifed("ember-views/views/view",
       Using a value for `templateName` that does not have a Handlebars template
       with a matching `data-template-name` attribute will throw an error.
 
-      For views classes that may have a template later defined (e.g. as the block
+      For templates classes that may have a template later defined (e.g. as the block
       portion of a `{{view}}` Handlebars helper call in another template or in
       a subclass), you can provide a `defaultTemplate` property set to compiled
       template function. If a template is not later provided for the view instance
@@ -40035,7 +40035,7 @@ enifed("ember-views/views/view",
       as the first argument to the method and an  `Ember.View` object as the
       second. The `Ember.View` will be the view whose rendered HTML was interacted
       with. This may be the view with the `eventManager` property or one of its
-      descendent views.
+      descendent templates.
 
       ```javascript
       AView = Ember.View.extend({
@@ -40043,7 +40043,7 @@ enifed("ember-views/views/view",
           doubleClick: function(event, view) {
             // will be called when when an instance's
             // rendered element or any rendering
-            // of this views's descendent
+            // of this templates's descendent
             // elements is clicked
           }
         })
@@ -40066,7 +40066,7 @@ enifed("ember-views/views/view",
       });
       ```
 
-      Similarly a view's event manager will take precedence for events of any views
+      Similarly a view's event manager will take precedence for events of any templates
       rendered as a descendent. A method name that matches an event name will not
       be called if the view instance was rendered inside the HTML representation of
       a view that has an `eventManager` property defined that handles events of the
@@ -40280,7 +40280,7 @@ enifed("ember-views/views/view",
         if (!name) { return; }
         
         if (!this.container) {
-          throw new EmberError('Container was not found when looking up a views template. ' +
+          throw new EmberError('Container was not found when looking up a templates template. ' +
                      'This is most likely due to manually instantiating an Ember.View. ' +
                      'See: http://git.io/EKPpnA');
         }
@@ -40363,7 +40363,7 @@ enifed("ember-views/views/view",
       isVisible: true,
 
       /**
-        Array of child views. You should never edit this array directly.
+        Array of child templates. You should never edit this array directly.
         Instead, use `appendChild` and `removeFromParent`.
 
         @property childViews
@@ -40857,7 +40857,7 @@ enifed("ember-views/views/view",
         automatically.
 
         If your application uses the `rootElement` property, you must append
-        the view within that element. Rendering views outside of the `rootElement`
+        the view within that element. Rendering templates outside of the `rootElement`
         is not supported.
 
         Note that this method just schedules the view to be appended; the DOM
@@ -40905,11 +40905,11 @@ enifed("ember-views/views/view",
       },
 
       /**
-        Creates a DOM representation of the view and all of its child views by
+        Creates a DOM representation of the view and all of its child templates by
         recursively calling the `render()` method.
 
         After the element has been inserted into the DOM, `didInsertElement` will
-        be called on this view and all of its child views.
+        be called on this view and all of its child templates.
 
         @method createElement
         @return {Ember.View} receiver
@@ -40952,7 +40952,7 @@ enifed("ember-views/views/view",
       willClearRender: Ember.K,
 
       /**
-        Destroys any existing element along with the element for any child views
+        Destroys any existing element along with the element for any child templates
         as well. If the view does not currently have a element, then this method
         will do nothing.
 
@@ -41041,7 +41041,7 @@ enifed("ember-views/views/view",
         element is first created. If you change the `tagName` for an element, you
         must destroy and recreate the view element.
 
-        By default, the render buffer will use a `<div>` tag for views.
+        By default, the render buffer will use a `<div>` tag for templates.
 
         @property tagName
         @type String
@@ -41157,7 +41157,7 @@ enifed("ember-views/views/view",
         Setup a view, but do not finish waking it up.
 
         * configure `childViews`
-        * register the view with the global views hash, which is used for event
+        * register the view with the global templates hash, which is used for event
           dispatch
 
         @method init
@@ -41170,7 +41170,7 @@ enifed("ember-views/views/view",
 
         this._super();
 
-        // setup child views. be sure to clone the child views array first
+        // setup child templates. be sure to clone the child templates array first
         this._childViews = this._childViews.slice();
 
                 this.classNameBindings = emberA(this.classNameBindings.slice());
@@ -41245,7 +41245,7 @@ enifed("ember-views/views/view",
 
       /**
         You must call `destroy` on a view to destroy the view (and all of its
-        child views). This will remove the view from any parent node, then make
+        child templates). This will remove the view from any parent node, then make
         sure that the DOM element managed by the view can be released by the
         memory manager.
 
@@ -41607,7 +41607,7 @@ enifed("ember-views/views/view",
     };
 
     /**
-      Global views hash
+      Global templates hash
 
       @property views
       @static
@@ -41615,7 +41615,7 @@ enifed("ember-views/views/view",
     */
     View.views = {};
 
-    // If someone overrides the child views computed property when
+    // If someone overrides the child templates computed property when
     // defining their class, we want to be able to process the user's
     // supplied childViews and then restore the original computed property
     // at view initialization time. This happens in Ember.ContainerView's init
@@ -41652,7 +41652,7 @@ enifed("ember-views/views/view",
     __exports__["default"] = View;
   });
 enifed("ember",
-  ["ember-metal","ember-runtime","ember-handlebars","ember-views","ember-routing","ember-routing-handlebars","ember-application","ember-extension-support"],
+  ["ember-metal","ember-runtime","ember-handlebars","ember-templates","ember-routing","ember-routing-handlebars","ember-application","ember-extension-support"],
   function(__dependency1__, __dependency2__, __dependency3__, __dependency4__, __dependency5__, __dependency6__, __dependency7__, __dependency8__) {
     "use strict";
     /* global navigator */

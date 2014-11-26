@@ -5,6 +5,9 @@
   border-radius: 2px;
   text-shadow: none;
   font-weight: bold;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .medium {

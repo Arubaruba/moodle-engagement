@@ -6,6 +6,7 @@ var config = require('./config.json');
  * @returns {boolean}
  */
 function login(req, res, next) {
+  console.log('ok..');
   var moodleRequest = http.request({
     hostname: config['moodleHost'],
     method: 'POST',
@@ -16,7 +17,7 @@ function login(req, res, next) {
   }, function (moodleResponse) {
     res.json([moodleResponse.statusCode, moodleResponse.headers['set-cookie']]);
   });
-  moodleRequest.write('username=admin&password=Moodle123%21');
+  moodleRequest.write('username=' + encodeURIComponent(req.query.username) + '&password=' + encodeURIComponent(req.query.password));
   moodleRequest.end();
 }
 

@@ -13,7 +13,7 @@ app.use('/data', authentication.isLoggedIn);
 // The login path
 app.get('/login', authentication.login);
 
-app.get('/data/students', function (req, res) {
+app.get('/data/least_active_students', function (req, res) {
 //  res.json({students: [{}]});
   //WHERE `lastlogin` > 0
   req.db.queryAsync('SELECT `firstname` as `firstName`, `lastname` as `lastName`, `email`, `lastlogin` as `lastLogin` FROM mdl_user ').then(function(result) {
