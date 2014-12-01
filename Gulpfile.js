@@ -27,6 +27,7 @@ gulp.task('local-scripts', function () {
     .pipe(concat(packageName + '.local-scripts.js'))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(buildPaths.temp))
+    .pipe(livereload())
 });
 
 
@@ -43,7 +44,7 @@ gulp.task('dependencies', function () {
     .pipe(gulp.dest(buildPaths.temp));
 });
 
-gulp.task('templates', function() {
+gulp.task('templates', function () {
   gulp.src([
     'app/templates/**/*.hbs'
   ])
@@ -57,15 +58,17 @@ gulp.task('templates', function() {
     }))
     .pipe(uglify())
     .pipe(concat(packageName + '.templates.js'))
-    .pipe(gulp.dest(buildPaths.temp));
+    .pipe(gulp.dest(buildPaths.temp))
+    .pipe(livereload());
 });
 
-gulp.task('sass', function() {
+gulp.task('sass', function () {
   return eventStream.merge(
     gulp.src('bower_components/skeleton/stylesheets/*.css'),
     gulp.src('app/**/*.scss').pipe(sass().on('error', gutil.log))
   ).pipe(concat(packageName + '.css')).pipe(minifyCSS())
-  .pipe(gulp.dest(buildPaths.temp));
+    .pipe(gulp.dest(buildPaths.temp))
+    .pipe(livereload());
 });
 
 gulp.task('default', function () {

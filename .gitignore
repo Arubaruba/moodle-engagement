@@ -29,5 +29,5 @@ node_modules
 /node/docs
 bower_components
 
-tmp
+/tmp
 .idea
