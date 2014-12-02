@@ -14,7 +14,9 @@ function login(req, res, next) {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   }, function (moodleResponse) {
-    res.json([moodleResponse.statusCode, moodleResponse.headers['set-cookie']]);
+    // Take the second cookie header (the newest token) and extract the sid with a regex
+    var cookieString = moodleResponse.headers['set-cookie'][1];
+    res.end(cookieString.match(/=(\w+)/)[1]);
   });
   moodleRequest.write('username=' + encodeURIComponent(req.query.username) + '&password=' + encodeURIComponent(req.query.password));
   moodleRequest.end();
@@ -29,12 +31,14 @@ function login(req, res, next) {
 
 //TODO SET TIMEMODIFIED TO CURRENT TIME IF TOKEN EXISTS
 function isLoggedIn(req, res, next) {
+  var authToken = req.headers['moodle_token'];
   req.db.queryAsync('SELECT userid FROM `mdl_sessions` WHERE sid = ?' +
-  ' AND NOT FROM_UNIXTIME(timemodified) < DATE_SUB(now(), INTERVAL 20 MINUTE) LIMIT 1', [req.headers.moodleToken]).then(function (results) {
+  ' AND NOT FROM_UNIXTIME(timemodified) < DATE_SUB(now(), INTERVAL 20 MINUTE) LIMIT 1', [authToken]).then(function (results) {
     if (results[0].length == 0) {
       res.statusCode = 422;
       res.end('not_logged_in');
     } else {
+      req.db.queryAsync('UPDATE mdl_sessions SET `timemodified` = ? WHERE sid = ?;', [Date.now() / 1000, authToken]);
       req.user = results[0].userid;
       next();
     }

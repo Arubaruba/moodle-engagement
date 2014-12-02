@@ -4,9 +4,11 @@ var MoodleURL = 'http://localhost/moodle';
 
 App.ApplicationAdapter = DS.RESTAdapter.extend({
   namespace: 'data',
-  headers: {
-    moodleToken: localStorage.moodleToken
-  }
+  headers: function() {
+    return {
+      moodle_token: this.get('App.moodleToken') || localStorage.moodleToken
+    };
+  }.property('App.moodleToken')
 });
 
 App.Router.map(function() {

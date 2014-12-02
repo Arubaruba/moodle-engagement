@@ -32,7 +32,7 @@ gulp.task('local-scripts', function () {
 
 
 gulp.task('dependencies', function () {
-  return gulp.src([
+  gulp.src([
     'bower_components/jquery/dist/jquery.min.js',
     'bower_components/handlebars/handlebars.min.js',
     'bower_components/ember/ember.min.js',
