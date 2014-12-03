@@ -2,7 +2,5 @@
   "sessionDurationMinutes": 10,
   "moodleHost": "localhost",
   "moodlePath": "/moodle",
-  "indicators": {
-    "lastLogin": "lastLogin"
-  }
+  "indicatorDir": "./indicators"
 }

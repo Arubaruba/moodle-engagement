@@ -5,29 +5,31 @@
 	</div>
   <div class="sixteen columns least-active-students">
     <div>
-      <a class="button-1 medium report-students" href="">Report {{this.length}} Students</a>
+      <a class="button-1 medium report-students" href="">Report {{model.length}} Students</a>
       <h2>Least Active Students</h2>
       <div>
-        <select class="small" name="" id="">
-          <option value="">All Classes</option>
-          <option value="">Intro to ..</option>
-        </select>
+        {{view Ember.Select content="classes" optionLabelPath="content.name" optionValuePath="content.id" class="small"}}
+        {{#each classes}}
+          {{name}}
+        {{/each}}
       </div>
       <table class="table-1">
         <tr class="headings">
           <th>Name</th>
           <th>
-            <select name="" id="">
-              <option value="">1 Week</option>
-              <option value="">2 Month<option>
-            </select>
-            Last Login
+            Last Active
           </th>
+          <th>Score</th>
         </tr>
         {{#each model}}
           <tr>
             <td>{{fullName}}</td>
-            <td>{{lastLogin}}</td>
+            {{#if neverActive}}
+							<td>Never</td>
+            {{else}}
+							<td>{{daysSinceActive}} days ago</td>
+            {{/if}}
+            <td>{{score}}</td>
           </tr>
         {{/each}}
         <tr class="show-more">
