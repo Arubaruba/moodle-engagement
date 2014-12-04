@@ -39,7 +39,7 @@ function isLoggedIn(req, res, next) {
       res.end('not_logged_in');
     } else {
       req.db.queryAsync('UPDATE mdl_sessions SET `timemodified` = ? WHERE sid = ?;', [Date.now() / 1000, authToken]);
-      req.user = results[0].userid;
+      req.user = results[0][0].userid;
       next();
     }
   });
