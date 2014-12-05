@@ -15,7 +15,7 @@ app.get('/login', authentication.login);
 
 var studentsQuery = database.loadQuery('students');
 app.get('/data/students', function (req, res) {
-  req.db.queryAsync(studentsQuery, [req.query.class]).then(function (result) {
+  req.db.queryAsync(studentsQuery, [req.user, req.query.class, req.query.class]).then(function (result) {
     res.json({students: result[0]});
   });
 });

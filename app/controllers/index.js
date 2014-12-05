@@ -26,7 +26,6 @@ App.IndexController = Ember.Controller.extend({
         if (id == -1) {
           controller.store.find('student');
         } else {
-          //TODO make node find the right students
           controller.store.find('student', {'class': id});
         }
       })
