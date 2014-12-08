@@ -4,7 +4,7 @@ App.Student = DS.Model.extend({
   email: DS.attr('string'),
   daysSinceActive: DS.attr('number'),
   score: DS.attr('number'),
-  classes: DS.hasMany('class'),
+  courses: DS.hasMany('course', {async: true}),
 
   fullName: function() {
     return this.get('firstName') + ' ' + this.get('lastName')

@@ -16,14 +16,33 @@ app.get('/login', authentication.login);
 var studentsQuery = database.loadQuery('students');
 app.get('/data/students', function (req, res) {
   req.db.queryAsync(studentsQuery, [req.user, req.query.class, req.query.class]).then(function (result) {
-    res.json({students: result[0]});
+    var students = result[0];
+    students.forEach(function (student) {
+      student.courses = student.course_list.split(',');
+      delete student.course_list;
+    });
+
+    // Fake Data
+    //var students = [];
+    //for (var i = 0; i < 1000; i++) {
+    //  students.push({id: i +"", firstName: "Student"+i, lastName: "", daysSinceActive: 3, score: 100});
+    //}
+
+    res.json({students: students});
+    console.log(students);
   });
 });
 
-var classesQuery = database.loadQuery('classes');
-app.get('/data/classes', function (req, res) {
-  req.db.queryAsync(classesQuery, [req.user]).then(function (result) {
-    res.json({classes: result[0]});
+var coursesQuery = database.loadQuery('courses');
+app.get('/data/courses', function (req, res) {
+  req.db.queryAsync(coursesQuery, [req.user]).then(function (result) {
+    var courses = result[0];
+    courses.push({
+      id: -1,
+      name: 'All'
+    });
+    res.json({courses: courses});
+    console.log(courses);
   });
 });
 
