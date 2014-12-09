@@ -31,7 +31,7 @@ FROM mdl_user
 
 LEFT JOIN mdl_user_enrolments as mdl_user_enrolments_teacher ON mdl_user_enrolments_teacher.userid = ?
 LEFT JOIN mdl_enrol as mdl_enrol_teacher ON mdl_enrol_teacher.id = mdl_user_enrolments_teacher.enrolid
-LEFT JOIN mdl_course ON mdl_course.id = mdl_enrol_teacher.courseid AND (? = -1 OR mdl_course.id = ?)
+LEFT JOIN mdl_course ON mdl_course.id = mdl_enrol_teacher.courseid AND (? IS NULL OR mdl_course.id = ?)
 
 LEFT JOIN mdl_user_enrolments ON mdl_user_enrolments.userid = mdl_user.id
 LEFT JOIN mdl_enrol ON mdl_enrol.id = mdl_user_enrolments.enrolid AND mdl_enrol.courseid = mdl_course.id

@@ -36,15 +36,9 @@ app.get('/data/students', function (req, res) {
 });
 
 var coursesQuery = database.loadQuery('courses');
-app.get('/data/courses', function (req, res) {
-  req.db.queryAsync(coursesQuery, [req.userId]).then(function (result) {
-    var courses = result[0];
-    courses.push({
-      id: -1,
-      name: 'All'
-    });
-    res.json({courses: courses});
-    console.log(courses);
+app.get('/data/courses/$id', function (req, res) {
+  req.db.queryAsync(coursesQuery, [req.params.id]).then(function (result) {
+    res.json({courses: result[0]});
   });
 });
 

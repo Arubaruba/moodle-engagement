@@ -5,11 +5,9 @@
 	</div>
   <div class="sixteen columns least-active-students">
     <div>
-      <a class="button-1 medium report-students" href="">Download Excel File</a>
-      <h2>Least Active Students</h2>
-      <div>
-        {{view Ember.Select content=courses optionLabelPath="content.name"
-          optionValuePath="content.id" class="small" selection=selectedClass}}
+      <div class="upper-bar">
+        <a class="button-1 medium" href="">Download Excel File</a>
+        <h2>Students</h2>
       </div>
       <table class="table-1">
         <tr class="headings">
@@ -27,6 +25,11 @@
             {{else}}
 							<td>{{daysSinceActive}} days ago</td>
             {{/if}}
+            <td>
+              {{#each courses}}
+                3
+              {{/each}}
+            </td>
             <td>{{score}}</td>
           </tr>
         {{/each}}

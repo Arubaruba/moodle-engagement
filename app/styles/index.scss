@@ -1,6 +1,12 @@
 .index {
-  .report-students {
-    float: right;
+  .upper-bar {
+    padding-bottom: 10px;
+    a {
+      float: right;
+    }
+    h2 {
+      padding-top: 12px;
+    }
   }
   .least-active-students {
     padding: 20px 0;
