@@ -1,11 +1,12 @@
 var http = require('http');
 var config = require('./config.json');
+var cookieParser = require('cookie-parser');
 /**
  * Get a moodle session token for the user
  * @param req
  * @returns {boolean}
  */
-function login(req, res, next) {
+function login(req, res) {
   var moodleRequest = http.request({
     hostname: config['moodleHost'],
     method: 'POST',
@@ -14,9 +15,22 @@ function login(req, res, next) {
       'Content-Type': 'application/x-www-form-urlencoded'
     }
   }, function (moodleResponse) {
-    // Take the second cookie header (the newest token) and extract the sid with a regex
-    var cookieString = moodleResponse.headers['set-cookie'][1];
-    res.end(cookieString.match(/=(\w+)/)[1]);
+    // Get the newest session token - the last MoodleSession cookie
+    var session;
+    moodleResponse.headers['set-cookie'].forEach(function(currentValue) {
+      var match = currentValue.match(/MoodleSession=(\w+)/);
+      if (match) session = match[1];
+    });
+    // If the user failed to login they will still get a token - a guest token.
+    // Delete the guest token while using the Delete to check for it's existence
+    req.db.queryAsync('DELETE FROM mdl_sessions WHERE sid = ? AND userid = 0', [session]).then(function(result) {
+      if (result[0].affectedRows !== 0) {
+        res.statusCode = 403;
+        res.end();
+      } else {
+        res.end(session);
+      }
+    });
   });
   moodleRequest.write('username=' + encodeURIComponent(req.query.username) + '&password=' + encodeURIComponent(req.query.password));
   moodleRequest.end();
@@ -29,7 +43,6 @@ function login(req, res, next) {
  * This also provides the user id in the req object as 'req.user'.
  */
 
-//TODO SET TIMEMODIFIED TO CURRENT TIME IF TOKEN EXISTS
 function isLoggedIn(req, res, next) {
   var authToken = req.headers['moodle_token'];
   req.db.queryAsync('SELECT userid FROM `mdl_sessions` WHERE sid = ?' +
@@ -39,7 +52,7 @@ function isLoggedIn(req, res, next) {
       res.end('not_logged_in');
     } else {
       req.db.queryAsync('UPDATE mdl_sessions SET `timemodified` = ? WHERE sid = ?;', [Date.now() / 1000, authToken]);
-      req.user = results[0][0].userid;
+      req.userId = results[0][0].userid;
       next();
     }
   });

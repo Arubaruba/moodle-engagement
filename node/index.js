@@ -6,16 +6,18 @@ var authentication = require('./authentication');
 var app = express();
 
 // Add database access to the request (req) variable
-app.use('/data', database.addToRequest);
-// Make sure the user is logged in if they want to access the RESTful service
-app.use('/data', authentication.isLoggedIn);
+app.use(database.addToRequest);
 
 // The login path
 app.get('/login', authentication.login);
 
+// Make sure the user is logged in if they want to access the RESTful service
+app.use('/data', authentication.isLoggedIn);
+
 var studentsQuery = database.loadQuery('students');
 app.get('/data/students', function (req, res) {
-  req.db.queryAsync(studentsQuery, [req.user, req.query.class, req.query.class]).then(function (result) {
+  console.log(req.query);
+  req.db.queryAsync(studentsQuery, [req.userId, req.query.course, req.query.course]).then(function (result) {
     var students = result[0];
     students.forEach(function (student) {
       student.courses = student.course_list.split(',');
@@ -35,7 +37,7 @@ app.get('/data/students', function (req, res) {
 
 var coursesQuery = database.loadQuery('courses');
 app.get('/data/courses', function (req, res) {
-  req.db.queryAsync(coursesQuery, [req.user]).then(function (result) {
+  req.db.queryAsync(coursesQuery, [req.userId]).then(function (result) {
     var courses = result[0];
     courses.push({
       id: -1,

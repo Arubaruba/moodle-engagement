@@ -64,7 +64,7 @@ gulp.task('templates', function () {
 
 gulp.task('sass', function () {
   return eventStream.merge(
-    gulp.src('bower_components/skeleton/stylesheets/*.css'),
+    gulp.src('bower_components/skeleton/stylesheets/skeleton.css'),
     gulp.src('app/**/*.scss').pipe(sass().on('error', gutil.log))
   ).pipe(concat(packageName + '.css')).pipe(minifyCSS())
     .pipe(gulp.dest(buildPaths.temp))

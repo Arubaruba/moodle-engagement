@@ -1,5 +1,5 @@
 App.IndexController = Ember.Controller.extend({
-  selectedCourse: null,
+  selectedCourse: {id: -1, name: 'All'},
   actions: {
     logout: function () {
       localStorage.moodleToken = '';

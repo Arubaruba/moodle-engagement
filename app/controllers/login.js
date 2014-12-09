@@ -1,11 +1,14 @@
 App.LoginController = Ember.Controller.extend({
   actions: {
-    login: function() {
+    login: function () {
       var controller = this;
-      $.get('/login', {username: 'teacher0', password: 'Moodle123!'}, function(data) {
+      controller.set('loginError', '');
+      $.get('/login', {username: this.get('username'), password: this.get('password')}, function (data) {
         localStorage.moodleToken = data;
         App.set('moodleToken', data);
         controller.transitionTo('index');
+      }).fail(function () {
+        controller.set('loginError', 'Invalid Credentials');
       });
     }
   }

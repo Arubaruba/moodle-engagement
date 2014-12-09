@@ -1,10 +1,17 @@
 <div class="login">
-  <h1>Moodle Engagement Analytics</h1>
-	<div class="six columns">
-    <input type="email" placeholder="Moodle Username"/>
-	</div>
-	<div class="six columns">
-		<input type="password" placeholder="Moodle Password"/>
-	</div>
-	<a class="four columns button-1" {{action 'login'}}>Login</a>
+  <form {{action 'login' on='submit'}}>
+    <h1>Moodle Engagement Analytics</h1>
+
+    <div class="six columns">
+      {{input value=username placeholder='Moodle Username'}}
+    </div>
+    <div class="six columns">
+      {{input type='password' value=password placeholder='Moodle Password'}}
+    </div>
+    <button class="four columns button-1">Login</button>
+
+    <div class="sixteen columns error-message">
+      {{loginError}}
+    </div>
+  </form>
 </div>

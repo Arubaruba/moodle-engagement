@@ -6,14 +6,20 @@
     margin-bottom: 20px;
   }
 
-  a, input {
+  button, input {
     font-size: 25px;
     font-weight: normal;
     text-decoration: none;
     box-sizing: border-box;
     text-align: center;
-    padding: 15px !important;
     height: 53px;
     width: 100%;
+  }
+
+  .error-message {
+    padding: 20px 0;
+    font-weight: bold;
+    font-size: 20px;
+    color: #e80800;
   }
 }

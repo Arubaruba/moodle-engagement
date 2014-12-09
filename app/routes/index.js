@@ -1,7 +1,8 @@
 App.IndexRoute = Ember.Route.extend({
   model: function () {
     var controller = this.controllerFor('index');
-    return this.store.findAll('student', {
+    return this.store.find('student', {
+      course: controller.get('selectedCourse.id')
     });
   },
   setupController: function(controller, model) {
